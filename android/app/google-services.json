@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "553398788973",
+    "firebase_url": "https://ellynem-14f6d.firebaseio.com",
+    "project_id": "ellynem-14f6d",
+    "storage_bucket": "ellynem-14f6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553398788973:android:ec8c9f56cce03cec66f064",
+        "android_client_info": {
+          "package_name": "com.example.ellynem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553398788973-5f2pri2sv3gvlsfchu24v7836kup209k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX1xDzTgTDrvDynBLKRioBJi4VMfFl3Y0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553398788973-5f2pri2sv3gvlsfchu24v7836kup209k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

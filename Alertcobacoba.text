@@ -1,0 +1,88 @@
+Alert(
+                    context: context,
+                    title: "LOGIN",
+                    content: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Form(
+                        key: formKey,
+                        child: (_formType == FormType.login)
+                            ? Column(
+                                children: <Widget>[
+                                  new TextFormField(
+                                    decoration:
+                                        new InputDecoration(labelText: 'Email'),
+                                    validator: (value) => value.isEmpty
+                                        ? 'Email tidak boleh kosong'
+                                        : null,
+                                    onSaved: (value) => _email = value,
+                                  ),
+                                  new TextFormField(
+                                    decoration: new InputDecoration(
+                                        labelText: 'Password'),
+                                    obscureText: true,
+                                    validator: (value) => value.isEmpty
+                                        ? 'Password tidak boleh kosong / min 6 character'
+                                        : null,
+                                    onSaved: (value) => _password = value,
+                                  ),
+                                  new FlatButton(
+                                    onPressed: moveToRegister,
+                                    child: new Text(
+                                      'Create an account ',
+                                      style: new TextStyle(fontSize: 20.0),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : Column(
+                                children: <Widget>[
+                                  new TextFormField(
+                                    decoration:
+                                        new InputDecoration(labelText: 'Email'),
+                                    validator: (value) => value.isEmpty
+                                        ? 'Email tidak boleh kosong'
+                                        : null,
+                                    onSaved: (value) => _email = value,
+                                  ),
+                                  new TextFormField(
+                                    decoration: new InputDecoration(
+                                        labelText: 'Password'),
+                                    obscureText: true,
+                                    validator: (value) => value.isEmpty
+                                        ? 'Password tidak boleh kosong / min 6 character'
+                                        : null,
+                                    onSaved: (value) => _password = value,
+                                  ),
+                                  new FlatButton(
+                                      onPressed: moveToLogin,
+                                      child: new Text(
+                                        'Have an account? Login',
+                                        style: new TextStyle(fontSize: 20.0),
+                                      ))
+                                ],
+                              ),
+                      ),
+                    ),
+                    buttons: [
+                      (_formType == FormType.login)
+                          ? DialogButton(
+                              onPressed: validateAndSubmit,
+                              color: Colors.yellow[700],
+                              child: Text(
+                                "LOGIN",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            )
+                          : DialogButton(
+                              onPressed: validateAndSubmit,
+                              color: Colors.yellow[700],
+                              child: Text(
+                                "Register",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                      // buildSubmitButtons(),
+                    ]).show()
+              
