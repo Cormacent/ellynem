@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../services/authentication.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class EmailFieldValidator {
   static String validate(String value) {
@@ -54,15 +55,24 @@ class _LoginPageState extends State<LoginPage> {
         if (_formType == FormType.login) {
           userId = await widget.auth.signIn(_email, _password);
           print('Signed in: $userId');
+          Fluttertoast.showToast(
+              msg: "Loggin Success",
+              toastLength: Toast.LENGTH_SHORT,
+              backgroundColor: Colors.orange,
+              textColor: Colors.white);
         } else {
           userId = await widget.auth.signUp(_email, _password);
           print('Registered user: $userId');
-
-          widget.auth.getCurrentUser().then((user){
+          widget.auth.getCurrentUser().then((user) {
             UserUpdateInfo userUpdate = UserUpdateInfo();
             userUpdate.displayName = _userName;
             user.updateProfile(userUpdate);
           });
+          Fluttertoast.showToast(
+              msg: "Register Success",
+              toastLength: Toast.LENGTH_SHORT,
+              backgroundColor: Colors.orange,
+              textColor: Colors.white);
         }
         if (userId.length > 0 &&
             userId != null &&

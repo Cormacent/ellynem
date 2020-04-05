@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import '../services/authentication.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MainDrawer extends StatefulWidget {
   MainDrawer(
-      {Key key,
-      this.auth,
-      this.logoutCallback,
-      this.userEmail,
-      this.userName})
+      {Key key, this.auth, this.logoutCallback, this.userEmail, this.userName})
       : super(key: key);
 
   final BaseAuth auth;
@@ -31,6 +28,11 @@ class _MainDrawerState extends State<MainDrawer> {
     try {
       await widget.auth.signOut();
       widget.logoutCallback();
+      Fluttertoast.showToast(
+          msg: "Logout",
+          toastLength: Toast.LENGTH_SHORT,
+          backgroundColor: Colors.orange,
+          textColor: Colors.white);
       Navigator.pushReplacementNamed(context, '/');
     } catch (e) {
       print(e);

@@ -3,6 +3,7 @@ import 'package:ellynem/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import '../modal/product.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Item extends StatefulWidget {
   Item({Key key, this.auth, this.userId}) : super(key: key);
@@ -21,6 +22,7 @@ class _ItemState extends State<Item> {
   String _userEmail = "";
   String _userId = "";
   String namaItem = "";
+  String idItem = "";
 
   @override
   void initState() {
@@ -194,10 +196,11 @@ class _ItemState extends State<Item> {
                   onPressed: () {
                     (_userEmail != "")
                         ? setState(() {
-                            namaItem = doc.data['nama'];
                             _itemNumber += 1;
-                            sentToCart(_itemNumber, namaItem);
+                            sentToCart(_itemNumber, doc.data['id'],
+                                doc.data['nama'], doc.data['harga']);
                             print(_itemNumber);
+                            showColoredToast(doc.data['nama']);
                           })
                         : Navigator.of(context).pushNamed('/login');
                   },
@@ -298,14 +301,30 @@ class _ItemState extends State<Item> {
     );
   }
 
-  void sentToCart(double itemNumber, namaItem) async {
+  void sentToCart(double itemNumber, idItem, namaItem, hargaItem) async {
     await db
-        .collection("cart")
+        .collection('user')
         .document(_userId)
-        .collection(namaItem)
-        .add({'jumlah': itemNumber});
+        .collection('cart')
+        .document(idItem)
+        .setData({'name': namaItem, 'harga': hargaItem, 'jumlah': itemNumber});
+
+    // await db
+    //     .collection(_userId)
+    //     .document("cart")
+    //     .collection(namaItem)
+    //     .add({'jumlah': itemNumber});
+
     // await db.collection("cart").document(_userId).setData(
     //   {'name': namaItem, 'jumlah': itemNumber},
     // );
+  }
+
+  void showColoredToast(name) {
+    Fluttertoast.showToast(
+        msg: "$name added to your cart",
+        toastLength: Toast.LENGTH_SHORT,
+        backgroundColor: Colors.orange,
+        textColor: Colors.white);
   }
 }
